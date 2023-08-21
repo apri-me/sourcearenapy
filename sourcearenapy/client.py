@@ -2,7 +2,7 @@ import asyncio
 #
 import aiohttp
 #
-import exceptions
+from sourcearenapy import exceptions
 
 
 class AsyncClient:
