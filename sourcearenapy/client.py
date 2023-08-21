@@ -12,7 +12,7 @@ class AsyncClient:
     loop: asyncio.BaseEventLoop
     def __init__(self, token: str) -> None:
         self.token = token
-        self.loop = self.get_loop()
+        self.loop = self._get_loop()
         self.session = self._init_session()
 
     def _init_session(self) -> aiohttp.ClientSession:
@@ -124,7 +124,7 @@ class AsyncClient:
             raise exceptions.SourceArenaRequestException(f'Invalid Response: {txt} \nURL : {response.url}')
 
     @staticmethod
-    def get_loop():
+    def _get_loop():
         """check if there is an event loop in the current thread, if not create one
         inspired by https://stackoverflow.com/questions/46727787/runtimeerror-there-is-no-current-event-loop-in-thread-in-async-apscheduler
         """
