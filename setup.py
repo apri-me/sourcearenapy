@@ -5,7 +5,7 @@ setup(
     version='1.0',
     description='An async client for using sourcearena api',
     author='apri-me',
-    packages=['sourcearena-py'],
+    packages=['sourcearenapy'],
     install_requires=[
         'aiohttp',
     ],
