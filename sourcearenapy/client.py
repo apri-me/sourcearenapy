@@ -112,6 +112,19 @@ class AsyncClient:
         }
         res = await self._get(**kwargs)
         return res
+    
+    async def get_indicators(self, symbol: str):
+        """*اندیکاتور*
+        
+        مقدار اندیکاتور های هر سهم
+        
+        
+        * اندیکاتور های موجود: rsi, mfi, cci, wr, so, macd, ichimoku, bb, ema, sma, rv * برای دریافت اندیکاتور های همه نماد ها مقدار فیلد all_indicators را برابر با all قرار دهید * این قسمت ساعت 15 هر روز قابل دسترسی خواهد بود 
+"""
+        res = await self._get(all_indicators='all', adjusted=True, name=symbol)
+        if type(res) == type(dict()) and "Error" in res.keys():
+            raise exceptions.SourceArenaRequestException(res['Error'])
+        return res
 
     @staticmethod
     async def _handle_response(response: aiohttp.ClientResponse):
