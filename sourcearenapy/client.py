@@ -25,6 +25,15 @@ class AsyncClient:
         kwargs["token"] = self.token
         async with self.session.get(self.BASE_URL, params=kwargs) as response:
             return await self._handle_response(response)
+    
+    async def get_codal_info(self, symbol: str='all', page_no: int=1) -> list|dict:
+        """اطلاعیه های نماد های بورسی و فرابورسی با قابلیت سرچ احراز هویت:
+        
+        symbol: نام نماد (مثال : شپنا) 
+        
+        page_no: شماره صفحه (مثال 1)"""
+        res = await self._get(codal=symbol, p=page_no)
+        return res
 
     async def get_candle(self, symbol: str, period: str) -> list|dict:
         """قیمت های مورد نیاز نمودار شمعی شامل اولین قیمت، آخرین قیمت، پایینترین قیمت و بالاترین قیمت از تاریخ فروردین ۱۳۹۸ به بعد 
